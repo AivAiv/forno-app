@@ -1,0 +1,29 @@
+<TemperatureControl>:
+    orientation: 'horizontal'
+    spacing: 20
+    size_hint_y: None
+    height: 80
+
+    ClickableImage:
+        source: 'assets/images/arrow_down.png'
+        size_hint: None, None
+        size: 60, 60
+        on_press: root.start_decrement()
+        on_release: root.stop_decrement()
+
+    Label:
+        text: str(root.value) + root.trail
+        font_size: '32sp'
+        bold: True
+        size_hint_x: None
+        width: 100
+        halign: 'center'
+        valign: 'middle'
+        text_size: self.size
+
+    ClickableImage:
+        source: 'assets/images/arrow_up.png'
+        size_hint: None, None
+        size: 60, 60
+        on_press: root.start_increment()
+        on_release: root.stop_increment()
