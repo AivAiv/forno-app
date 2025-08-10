@@ -1,7 +1,7 @@
 <HomeScreen>:
     BoxLayout:
         orientation: 'vertical'
-        padding: 20
+        padding: 0, 20
         spacing: 10
 
         FloatLayout:
@@ -11,7 +11,7 @@
                 source: 'assets/images/menu_button.png'
                 size_hint: None, None
                 size: 100, 100
-                pos_hint: {'x': 0.025, 'top': 1}
+                pos_hint: {'x': 0.025, 'top': 1.1}
                 on_release:
                     app.root.transition.direction = 'right'
                     app.root.current = 'standby'
@@ -20,7 +20,7 @@
                 source: 'assets/images/light_button.png'
                 size_hint: None, None
                 size: 100, 100
-                pos_hint: {'x': 0.25, 'top': 0.5}
+                pos_hint: {'x': 0.25, 'top': 0.75}
                 on_release:
                     root.switch_light()
 
@@ -28,18 +28,20 @@
                 source: 'assets/images/aspiration_button.png'
                 size_hint: None, None
                 size: 100, 100
-                pos_hint: {'x': 0.475, 'top': 1}
+                pos_hint: {'x': 0.475, 'top': 1.1}
                 on_release:
                     root.switch_aspiration()
         
         FloatLayout:
             size_hint_y: 0.6
+            size_hint_x: 1
 
             Image:
                 source: "assets/images/rounded_faded_rect.png"
-                size_hint: None, None
-                size: 480, 300
-                pos_hint: {"center_x": 0.5, "center_y": 0.5}
+                size_hint: 1, 1   
+                allow_stretch: True
+                keep_ratio: False
+                pos_hint: {"x": 0, "center_y": 0.5}
 
             Label:
                 text: '{:.0f}'.format(root.value) + "°C"
@@ -48,19 +50,17 @@
                 font_size: '64sp'
                 outline_width: 15
                 outline_colour: (0, 0, 0, 1)
-
                 size_hint: None, None
                 size: self.texture_size
                 # Allineata orizzontalmente al centro dell'immagine
                 x: (root.width / 2) - (self.width / 2)
                 # Verticalmente: posiziona la label poco sopra il bordo superiore dell'immagine
-                y: (root.height / 2 + 300 / 2) - self.height / 2 - 20
+                y: (root.height / 2 + 300 / 2) - self.height / 2 + 10
             
             BoxLayout:
                 orientation: 'vertical'
                 spacing: 5
-                size_hint: None, None
-                size: 300, 300
+                size_hint: 0.7, 0.65
                 pos_hint: {"center_x": 0.5, "center_y": 0.5}
 
                 TemperatureControl:
@@ -76,13 +76,13 @@
         FloatLayout:
             size_hint_y: 0.2
 
-            Slider:
-                min: 0
-                max: 500
-                value: root.value
-                size_hint_x: 0.5
-                pos_hint: {'x': 0, 'top': 1}
-                on_value: root.value = self.value
+            #Slider:
+            #    min: 0
+            #    max: 500
+            #    value: root.value
+            #    size_hint_x: 0.5
+            #    pos_hint: {'x': 0, 'top': 1}
+            #    on_value: root.value = self.value
 
             ClickableImage:
                 source: 'assets/images/exit_button.png'
