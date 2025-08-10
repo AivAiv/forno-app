@@ -205,3 +205,8 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+<<<<<<< HEAD
+=======
+
+.vscode
+>>>>>>> fa6c6b1 (Updated gitignore)
