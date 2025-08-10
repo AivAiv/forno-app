@@ -1,0 +1,38 @@
+<StandbyScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20, 40
+        spacing: 20
+
+        Image:
+            source: 'assets/images/logo.png'
+            size_hint_y: 3
+            allow_stretch: True
+            keep_ratio: True
+
+        Label:
+            id: time_label
+            text: "00:00"
+            font_size: '64sp'
+            halign: 'center'
+
+        Label:
+            id: date_label
+            text: "01/01/1970"
+            font_size: '32sp'
+            halign: 'center'
+
+        Widget:
+            size_hint_y: 0.1
+
+        ClickableImage:
+            source: 'assets/images/enter_button.png'
+            size_hint: None, None
+            size: 225, 225
+            pos_hint: {'center_x': 0.5}
+            on_release:
+                app.root.transition.direction = 'left'
+                app.root.current = 'home'
+        
+        Widget:
+            size_hint_y: 0.1
