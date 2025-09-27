@@ -18,15 +18,16 @@ class MyApp(App):
         self.state = state
 
     def build(self):
-        # Carico i .kv qui
-        Builder.load_file("ui/pages/standby/standby.kv")
-        Builder.load_file("ui/pages/home/home.kv")
-
         # Registro font se serve
         LabelBase.register(
             name="InriaSans",
             fn_regular="assets/fonts/Inria_Sans/InriaSans-Regular.ttf"
         )
+
+        # Carico i .kv qui
+        Builder.load_file("ui/components/temperature_control/temperature_control.kv")
+        Builder.load_file("ui/pages/standby/standby.kv")
+        Builder.load_file("ui/pages/home/home.kv")
 
         sm = MyScreenManager()
         sm.add_widget(StandbyScreen(name="standby", state=self.state))
