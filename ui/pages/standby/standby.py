@@ -21,3 +21,7 @@ class StandbyScreen(Screen):
         now = datetime.now()
         self.ids.time_label.text = now.strftime("%H:%M")
         self.ids.date_label.text = now.strftime("%d-%m-%Y")
+
+    def turn_hoven_on(self):
+        self.state.start_hoven(True)
+        print(f"[UI] Hoven ON")

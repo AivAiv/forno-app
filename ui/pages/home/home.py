@@ -35,12 +35,24 @@ class HomeScreen(Screen):
             self.rect = Rectangle(pos=self.pos, size=self.size)
         self.bind(pos=self.update_rect, size=self.update_rect)
         self.update_background(None, self.value) # Inizializza background
+        # self.ids.top_perc_control.bind(value=self.set_top_heater)
+        # self.ids.set_temp_control.bind(value=self.set_target)
+        # self.ids.bottom_perc_control.bind(value=self.set_bottom_heater)
 
     def update_ui(self, dt):
         self.ids.temp_label.text = f"{self.state.get_temp():.1f}°C"
         self.update_background(None, self.state.get_temp())
         self.update_light_button()
 
+    def set_target(self, value):
+        self.state.set_target(float(self.middle_temp))
+
+    def set_top_heater(self, value):
+        self.state.set_heater(True)
+    
+    def set_bottom_heater(self, value):
+        self.state.set_heater(False)
+    
     def set_target(self, value):
         self.state.set_target(float(value))
 
@@ -87,3 +99,7 @@ class HomeScreen(Screen):
             self.ids.light_button.source = "ui/assets/images/light_button_on.png"
         else:
             self.ids.light_button.source = "ui/assets/images/light_button.png"
+    
+    def turn_hoven_off(self):
+        self.state.start_hoven(False)
+        print(f"[UI] Hoven OFF")

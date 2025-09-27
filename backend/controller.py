@@ -11,20 +11,24 @@ class Controller(threading.Thread):
         self.state = state
         self.light = Light(pin=27)
         self.heater = Heater(pin=17)
-        self.thermo = Thermocouple(channel=0)
+        self.thermo = Thermocouple(channel=0, state=self.state)
 
         self.reset_hoven()
 
         # Internal variables
         self.last_light_state = False
         self.last_heater_state = False
+        self.last_hoven_state = False
 
     def run(self):
         while True:
             if self.state.is_hoven_on() == False:
-                self.reset_hoven()
-                print(f"[CONTROLLER] Hoven OFF")
-                break
+                if self.last_hoven_state != False:
+                    # Turn OFF
+                    self.reset_hoven()
+                    self.last_hoven_state = False
+                    print(f"[CONTROLLER] Hoven OFF")
+                continue
 
             # Temperature read
             temp = self.thermo.read_temp()

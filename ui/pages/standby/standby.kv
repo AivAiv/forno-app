@@ -31,6 +31,7 @@
             size: 225, 225
             pos_hint: {'center_x': 0.5}
             on_release:
+                root.turn_hoven_on()
                 app.root.transition.direction = 'left'
                 app.root.current = 'home'
         

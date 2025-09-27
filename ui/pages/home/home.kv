@@ -66,13 +66,17 @@
                 pos_hint: {"center_x": 0.5, "center_y": 0.5}
 
                 TemperatureControl:
+                    id: top_perc_control
                     value: root.top_temp
 
                 TemperatureControl:
+                    id: set_temp_control
                     value: root.middle_temp
                     trail: "°C"
+                    max_value: 500
 
                 TemperatureControl:
+                    id: bottom_perc_control
                     value: root.bottom_temp
         
         FloatLayout:
@@ -92,5 +96,6 @@
                 size: 125, 125
                 pos_hint: {'x': 0.6, 'y': 0.1}
                 on_release:
+                    root.turn_hoven_off()
                     app.root.transition.direction = 'right'
                     app.root.current = 'standby'

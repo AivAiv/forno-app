@@ -8,6 +8,8 @@ class TemperatureControl(BoxLayout):
     trail = StringProperty("%")
     step = NumericProperty(1)
     text_color = ColorProperty([1, 1, 1, 1])  # colore testo iniziale (bianco)
+    max_value = NumericProperty(100)
+    min_value = NumericProperty(0)
 
     _inc_event = None
     _dec_event = None
@@ -22,16 +24,16 @@ class TemperatureControl(BoxLayout):
         Window.bind(on_mouse_up=self._global_mouse_up)
 
     def increment_once(self, dt=None):
-        if self.value < 100:
+        if self.value < self.max_value:
             self.value += self.step
-            if self.value > 100:
-                self.value = 100
+            if self.value > self.max_value:
+                self.value = self.max_value
 
     def decrement_once(self, dt=None):
-        if self.value > 0:
+        if self.value > self.min_value:
             self.value -= self.step
-            if self.value < 0:
-                self.value = 0
+            if self.value < self.min_value:
+                self.value = self.min_value
 
     def _enable_boost(self, dt):
         self.step = 10
