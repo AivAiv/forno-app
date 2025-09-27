@@ -1,6 +1,15 @@
 import random
 
-# Mock termocoppia: restituisce una temperatura finta
-def get_temperature():
-    # Simula una temperatura che oscilla tra 20°C e 500°C
-    return 20 + random.random() * 500
+class Thermocouple:
+    """
+    Driver per la termocoppia.
+    Non mantiene stato, legge solo il valore.
+    """
+    def __init__(self, channel: int):
+        self.channel = channel
+        # Qui puoi inizializzare la libreria hardware reale
+        # es. import adafruit_max31855...
+
+    def read_temp(self) -> float:
+        # MOCK: restituisce una temperatura finta
+        return 20 + random.random() * 500

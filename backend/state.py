@@ -7,9 +7,18 @@ class SystemState:
         self._current_temp = 0.0
         self._target_temp = 0.0
         self._heater_on = False
+        self._is_on = False
 
         self.light = False
         self.aspiration = False
+    
+    def start_hoven(self, is_on):
+        with self._lock:
+            self._is_on = is_on
+
+    def is_hoven_on(self):
+        with self._lock:
+            return self._is_on
 
     def set_target(self, temp):
         with self._lock:
@@ -42,3 +51,4 @@ class SystemState:
     def get_light(self):
         with self._lock:
             return self.light
+    
