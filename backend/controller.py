@@ -10,14 +10,16 @@ class Controller(threading.Thread):
         super().__init__(daemon=True)
         self.state = state
         self.light = Light(pin=27)
-        self.heater = Heater(pin=17)
+        self.top_heater = Heater(pin=17)
+        self.bottom_heater = Heater(pin=18)
         self.thermo = Thermocouple(channel=0, state=self.state)
 
         self.reset_hoven()
 
-        # Internal variables
+        # Working variables
         self.last_light_state = False
-        self.last_heater_state = False
+        self.last_top_heater_state = False
+        self.last_bottom_heater_state = False
         self.last_hoven_state = False
 
     def run(self):
@@ -30,19 +32,23 @@ class Controller(threading.Thread):
                     print(f"[CONTROLLER] Hoven OFF")
                 continue
 
-            # Temperature read
-            temp = self.thermo.read_temp()
-            self.state.update_temp(temp)
+            self.state.print_state()
 
-            # Heater control
-            if temp < self.state.get_target():
-                if self.state.get_heater() != True:
-                    self.heater.on()
-                    self.state.set_heater(True)
-            else:
-                if self.state.get_heater() != False:
-                    self.heater.off()
-                    self.state.set_heater(False)
+            # # Temperature read
+            # temp = self.thermo.read_temp()
+            # self.state.update_temp(temp)
+
+            # # Heater control
+            # if temp < self.state.get_target():
+            #     if self.state.get_heater() != True:
+            #         self.top_heater.on()
+            #         self.bottom_heater.on()
+            #         self.state.set_heater(True)
+            # else:
+            #     if self.state.get_heater() != False:
+            #         self.top_heater.off()
+            #         self.bottom_heater.off()
+            #         self.state.set_heater(False)
             
 
             # Light control
@@ -58,4 +64,5 @@ class Controller(threading.Thread):
     
     def reset_hoven(self):
         self.light.off()
-        self.heater.off()
+        self.top_heater.off()
+        self.bottom_heater.off()

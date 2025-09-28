@@ -2,6 +2,9 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager
 from kivy.lang import Builder
 from kivy.core.text import LabelBase
+from kivy.config import Config
+
+# Config.set('graphics', 'fullscreen', 'auto')
 
 # Import schermate
 from ui.components.clickableimage.clickableimage import ClickableImage
