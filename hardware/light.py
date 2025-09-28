@@ -9,7 +9,7 @@ except ImportError:
         @staticmethod
         def setup(pin, mode): pass
         @staticmethod
-        def output(pin, val): print(f"[MOCK] Light pin {pin} -> {val}")
+        def output(pin, val): pass
         @staticmethod
         def cleanup(): pass
 

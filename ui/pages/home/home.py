@@ -2,6 +2,7 @@ from kivy.uix.screenmanager import Screen
 from kivy.clock import Clock
 from kivy.properties import NumericProperty, ListProperty, BooleanProperty, StringProperty
 from kivy.graphics import Color, Rectangle
+from datetime import datetime
 
 class HomeScreen(Screen):
     value = NumericProperty(0)  # Valore da 0 a 500
@@ -40,18 +41,15 @@ class HomeScreen(Screen):
         # self.ids.bottom_perc_control.bind(value=self.set_bottom_heater)
 
     def update_ui(self, dt):
-        self.ids.temp_label.text = f"{self.state.get_temp():.1f}°C"
+        self.ids.temp_label.text = f"{round(self.state.get_temp())}°C"
         self.update_background(None, self.state.get_temp())
         self.update_light_button()
 
-    def set_target(self, value):
-        self.state.set_target(float(self.middle_temp))
-
     def set_top_heater(self, value):
-        self.state.set_heater(True)
+        self.state.set_top_heater_perc(value)
     
     def set_bottom_heater(self, value):
-        self.state.set_heater(False)
+        self.state.set_bottom_heater_perc(value)
     
     def set_target(self, value):
         self.state.set_target(float(value))
@@ -103,3 +101,12 @@ class HomeScreen(Screen):
     def turn_hoven_off(self):
         self.state.start_hoven(False)
         print(f"[UI] Hoven OFF")
+
+    # Time setup
+    def on_enter(self):
+        self.update_time()
+        Clock.schedule_interval(self.update_time, 1)
+
+    def update_time(self, *args):
+        now = datetime.now()
+        self.ids.time_label.text = now.strftime("%H:%M:%S")

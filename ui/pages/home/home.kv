@@ -68,16 +68,19 @@
                 TemperatureControl:
                     id: top_perc_control
                     value: root.top_temp
+                    on_value: root.set_top_heater(self.value)
 
                 TemperatureControl:
                     id: set_temp_control
                     value: root.middle_temp
                     trail: "°C"
                     max_value: 500
+                    on_value: root.set_target(self.value)
 
                 TemperatureControl:
                     id: bottom_perc_control
                     value: root.bottom_temp
+                    on_value: root.set_bottom_heater(self.value)
         
         FloatLayout:
             size_hint_y: 0.2
@@ -90,6 +93,11 @@
             #    pos_hint: {'x': 0, 'top': 1}
             #    on_value: root.value = self.value
 
+            Label:
+                id: time_label
+                text: "00:00:00"
+                font_size: '40sp'
+                
             ClickableImage:
                 source: 'assets/images/exit_button.png'
                 size_hint: None, None

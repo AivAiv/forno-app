@@ -9,8 +9,8 @@ class SystemState:
         # Heating
         self._current_temp = 0.0
         self._target_temp = 0.0
-        self._top_heater_perc = 100.0
-        self._bottom_heater_perc = 100.0
+        self._top_heater_perc = 100
+        self._bottom_heater_perc = 100
         self._top_heater_on = False
         self._bottom_heater_on = False
 
@@ -43,7 +43,7 @@ class SystemState:
         with self._lock:
             return self._current_temp
     
-    def set_top_heater_perc(self, temp_perc: float):
+    def set_top_heater_perc(self, temp_perc: int):
         with self._lock:
             self._top_heater_perc = temp_perc
 
@@ -51,7 +51,7 @@ class SystemState:
         with self._lock:
             return self._top_heater_perc
         
-    def set_bottom_heater_perc(self, temp_perc: float):
+    def set_bottom_heater_perc(self, temp_perc: int):
         with self._lock:
             self._bottom_heater_perc = temp_perc
 

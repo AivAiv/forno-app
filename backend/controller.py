@@ -34,22 +34,23 @@ class Controller(threading.Thread):
 
             self.state.print_state()
 
-            # # Temperature read
-            # temp = self.thermo.read_temp()
-            # self.state.update_temp(temp)
+            # Temperature read
+            temp = self.thermo.read_temp()
+            self.state.update_temp(temp)
 
-            # # Heater control
-            # if temp < self.state.get_target():
-            #     if self.state.get_heater() != True:
-            #         self.top_heater.on()
-            #         self.bottom_heater.on()
-            #         self.state.set_heater(True)
-            # else:
-            #     if self.state.get_heater() != False:
-            #         self.top_heater.off()
-            #         self.bottom_heater.off()
-            #         self.state.set_heater(False)
-            
+            # Heater control
+            if temp < self.state.get_target():
+                if self.state.is_top_heater_on() != True:
+                    self.top_heater.on()
+                    self.bottom_heater.on()
+                    self.state.set_top_heater_on(True)
+                    self.state.set_bottom_heater_on(True)
+            else:
+                if self.state.is_top_heater_on() != False:
+                    self.top_heater.off()
+                    self.bottom_heater.off()
+                    self.state.set_top_heater_on(False)
+                    self.state.set_bottom_heater_on(False)
 
             # Light control
             if self.state.get_light() != self.last_light_state:
