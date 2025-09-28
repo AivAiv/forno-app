@@ -1,0 +1,33 @@
+<DevVarScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        ClickableImage:
+            source: 'ui/assets/images/arrow_back.png'
+            size_hint: None, None
+            size: 100, 100
+            pos_hint: {'x': 0.01, 'top': 1.1}
+            on_release:
+                app.root.transition.direction = 'right'
+                app.root.current = 'menu'
+        
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+
+            GridLayout:
+                cols: 1
+                spacing: 40
+                size_hint_y: None
+                height: 800
+
+                Label:
+                    size: 50, 50
+                    id: time_label
+                    text: "00:00"
+                    font_size: '32sp'
+                
+                Label:
+                    id: time_label
+                    text: "00:00"
+                    font_size: '32sp'
