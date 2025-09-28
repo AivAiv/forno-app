@@ -7,7 +7,7 @@ except ImportError:
         @staticmethod
         def setmode(x): pass
         @staticmethod
-        def setup(pin, mode): pass
+        def setup(pin, mode): print(f"[HARDWARE] Heater fake GPIO on")
         @staticmethod
         def output(pin, val): pass
         @staticmethod

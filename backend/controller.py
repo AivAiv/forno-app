@@ -9,7 +9,7 @@ class Controller(threading.Thread):
     def __init__(self, state):
         super().__init__(daemon=True)
         self.state = state
-        self.light = Light(pin=27)
+        self.light = Light(pin=12)
         self.top_heater = Heater(pin=17)
         self.bottom_heater = Heater(pin=18)
         self.thermo = Thermocouple(channel=0, state=self.state)
