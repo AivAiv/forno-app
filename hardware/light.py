@@ -25,11 +25,11 @@ class Light:
         self.off()
 
     def on(self):
-        GPIO.output(self.pin, True)
+        GPIO.output(self.pin, GPIO.HIGH)
         print(f"[HARDWARE] Light pin {self.pin} -> {True}")
 
     def off(self):
-        GPIO.output(self.pin, False)
+        GPIO.output(self.pin, GPIO.LOW)
         print(f"[HARDWARE] Light pin {self.pin} -> {False}")
 
     def toggle(self, current_state: bool) -> bool:
