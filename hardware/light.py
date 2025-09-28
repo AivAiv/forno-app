@@ -4,6 +4,8 @@ except ImportError:
     # mock per sviluppare su PC
     class GPIO:
         BCM = BOARD = OUT = None
+        HIGH = 1
+        LOW = 0
         @staticmethod
         def setmode(x): pass
         @staticmethod
